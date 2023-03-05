@@ -1,15 +1,20 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import './App.css'
+import { Container, useDisclosure } from '@chakra-ui/react';
+import React from 'react'
+import AppRouter from './components/AppRouter';
+import Header from './components/Header';
+import LoginModal from './components/modals/LoginModal';
 
-function App() {
-  const [count, setCount] = useState(0)
+const App: React.FC = () => {
+	const isAuth = true;
+	const { isOpen, onOpen, onClose } = useDisclosure()
 
-  return (
-    <div className="App">
-     My first time
-    </div>
-  )
+	return (
+		<Container maxW='container.xl'>
+			<Header isAuth={isAuth} onLogin={onOpen}/>
+			<AppRouter isAuth={isAuth} />
+			<LoginModal isOpen={isOpen} onClose={onClose} />
+		</Container>
+	)
 }
 
 export default App
